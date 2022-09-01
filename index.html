@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to Bootstrap -->
+    <link 
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Link to Fontawesome -->
+    <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+        crossorigin="anonymous"
+    />
+    <!-- Link to Google APIs -- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Link to Weather Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css"
+    />
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="./assets/style.css" /> 
+    <title>Weather Dashboard</title>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row navbar"></div>
+            <div class="col-12 text-center">
+                <h2>Weather Dashboard</h2>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-3 pb-2 pt-3" id="search-results">
+            <div class="row">
+                <div class="col-12">
+                    <h5> Search for a City: </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-input">
+                        <input class="form-control" type="text" id="citySearch" placeholder="Enter City">
+                        <button class="btn btn-primary" id="searchBtn">
+                            <i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <ul class="search-list" id="search-history">
+                        <!-- append li here -->
+                        <li class="search-list-item">item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Links to jQuery, moment.js, and JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/script.js"></script>
+</body>
+</html>
