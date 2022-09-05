@@ -18,8 +18,7 @@
     />
     <!-- Link to Google APIs -- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-      rel="stylesheet"
+    href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'
     />
     <!-- Link to Weather Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css"
@@ -37,7 +36,7 @@
             </div>
     </div>
     <div class="row">
-        <div class="col-3 pb-2 pt-3" id="search-results">
+        <div class="col-4 pb-2 pt-3" id="search-area">
             <div class="row">
                 <div class="col-12">
                     <h5> Search for a City: </h5>
@@ -46,24 +45,130 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-input">
-                        <input class="form-control" type="text" id="citySearch" placeholder="Enter City">
-                        <button class="btn btn-primary" id="searchBtn">
-                            <i class="fas fa-search"></i></button>
+                        <input class="user-form" type="text" id="citySearch" placeholder="Enter City">
+                        <div class="d-grid col-12 mx-auto">
+                            <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
+                        </div>
+                        <!--<button class="btn btn-primary" id="searchBtn">
+                            <i class="fas fa-search"></i></button> -->
                     </div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                    <ul class="search-list" id="search-history">
+                    <div class="card" style="width: 14rem;">
+                        <div class="card-header" id="search-results"></div>
+                        
+                            <div class="weather-history list-group-flush">
+                                <p class="history-city1">An item</p>
+                                <p class="history-city2">A second item</p>
+                                <p class="history-city3">A third item</p>
+                            </div>
+                    </div>
+                    <!--<ul class="search-list" id="search-history"> -->
                         <!-- append li here -->
-                        <li class="search-list-item">item</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="col-8 pb-5 pt-8" id="weather-display">
+        <div class="row">
+            <div class="col-12">
+                <!--<div style="height: 100px; background-color: rgba(255,0,0,0.1);"> 
+                    <div class="h-75 d-inline-block">Height 50%</div> -->
+                        <div class="card" style="width: 100%">
+                            <div class="card-body">
+                                <h5 class="current-weather" id="currentWeather">Date</h5>
+                            <div class="list-group-current list-group-flush">
+                                <p class="current-icon">Current Icon</p>
+                                <p class="current-temp">Current Temp</p>
+                                <p class="current-wind">Current Wind</p>
+                                <p class="current-humidity">Current Humidity</p>
+                                <p class="current-UVindex">Current UV Index</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row forecast" id="day-1">
+        <div class="row">
+            <div class="col-m-2 day1">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title" id="forecast-day1">Date</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="icon" id="icon">An icon</li>
+                                <li class="temp" id="temp">temp-day1</li>
+                                <li class="wind" id="wind">wind-day1</li>
+                                <li class="humidity" id="humidity">humidity-day1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-m-2 day2">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="forecast-date" id="forecast-day2">Date</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="icon" id="icon">An icon</li>
+                                    <li class="temp" id="temp">temp-day2</li>
+                                    <li class="wind" id="wind">wind-day2</li>
+                                    <li class="humidity" id="humidity">humidity-day2</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="col-m-2 day3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="forecast-date" id="forecast-day3">Date</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="icon" id="icon">An icon</li>
+                                    <li class="temp" id="temp">temp-day3</li>
+                                    <li class="wind" id="wind">wind-day3</li>
+                                    <li class="humidity" id="humidity">humidity-day3</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="col-m-2 day4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="forecast-date" id="forecast-day4">Date</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="icon" id="icon">An icon</li>
+                                    <li class="temp" id="temp">temp-day4</li>
+                                    <li class="wind" id="wind">wind-day4</li>
+                                    <li class="humidity" id="humidity">humidity-day4</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="col-m-2 day5">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="forecast-date" id="forecast-day5">Date</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="icon" id="icon">An icon</li>
+                                    <li class="temp" id="temp">temp-day5</li>
+                                    <li class="wind" id="wind">wind-day5</li>
+                                    <li class="humidity" id="humidity">humidity-day5</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Links to jQuery, moment.js, and JavaScript-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
