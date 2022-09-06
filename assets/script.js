@@ -1,102 +1,113 @@
-let currentDate = moment.unix(cityInfo.date).format("dddd, MMM Do");
+let currentDate = moment.unix(cityInfo.date).format("MM/DD/YY");
+let currentCity = "";
+let lastCity = "";
 
-// Create city search variables
-var cityInputEl = $("search-input");
-var submitEl = $("#searchBtn");
-var userFormEl = $("user-form");
+// API Key
 let apiKey = "8cdec653bf4d6c9ed8b17db127872228";
-let searchHistoryList = [];
 
 
-var formSubmitHandler = function (event) {
-    // Prevents sending to server -- stays on this page
-    event.preventDefault();
-    // Trim takes out extra white space
-    var cityname = cityInputEl.value.trim();
-    // Calls getCityWeather function
-    if (cityName) {
-        // Trim takes out extra white space
-        cityInputEl.value.trim = cityName;
-
-        getCityWeather(cityName);
-        cityInputValue.value = " ";
-    } else {
-        // If user has no input this is what they'll see
-        cityInputValue.value = " ",
-            alert("Please enter a city");
+// Handler for errors upon fetch
+var formFetchHandler = (response) => {
+    if (!response.ok) {
+        throw Error(response.statusText);
     }
-};
+    return response;
+}
 
+// getCurrentWeather function to get and display the current weather
+var getCurrentWeather = (event) => {
+    // Get searched city name and trim out extra white space
+    var city = $("#user-input").value.trim();
+    currentCity = $("#user-input").value.trim();
 
-//$("#searchBtn").on("click", (getCityWeather) => {
-//let cityName = cityInputEl.value.trim();
-
-
-// var getCityWeather = function (cityName) 
-
-
-let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + ${city}&units=imperial&appid=${apiKey}";
-//let iconUrl = `<img src="http://api.openweathermap.org/img/w/${iconCode}.png" alt="${futureResponse.daily[i].weather[0].main}" />`;
-
-// Function to call current weather
-function currentWeather(city) {
-    // Fetch the weather
+    // Fetch from weather API
+    let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=" + "8cdec653bf4d6c9ed8b17db127872228";
+   
     fetch(apiUrl)
-        .then(response => {
+        .then(formFetchHandler)
+        .then((response) => {
             if (response.ok) {
                 // Here we are getting the .then data and using it to display weather
-                return response.json().then(function (data) {
-                });
+                return response.json();
+
             } else {
-                alert("Error: " + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            alert("Unable to connect to Weather");
-        });
-    
-        .then(function (weatherData) {
-            $("#weather-display").empty();
-            console.log(weatherResponse);
-            var currentIcon = (weatherResponse.weather[0].icon);
-            var iconUrl = ("http://api.openweathermap.org/img/w/${iconCode}.png");
+                // If user has no input this is what they'll see
+                currentCity = " ",
+                    alert("Please enter a city");
+            };
 
-            // View current weather conditions for that city
-            // Display city name, date, and icon representing weather condition, temp,
-            // Humidity, and wind speed
-            var currentWeather = $(`
-            <h3 id="currentWeather">
-                ${weatherResponse.name} ${currentDate} <img src="${iconURL}" alt="${weatherResponse.weather[0].description}; /></h3>
-            <p> Temperature: ${weatherResponse.main.temp} °F </p>
-            <p> Wind Speed: ${weatherResponse.wind.speed} MPH </p>
-            <p> Humidity: ${weatherResponse.main.humidity} \% </p>
-        `);
+        .then((response) => {
+            // Save city to local storage
+            saveCity(city);
 
-            $(#weather-display).append(currentWeather);
-        });
+            // Create icon for the current weather condition using Open Weather Maps
+            let currentIcon= "http://api.openweathermap.org/img/w/" + response.weather[0].icon + ".png";
+            })
+            // If catch error on server end response
+            .catch(function (error) {
+                alert("Unable to connect to Weather");
+            });
+        
+            let currentWeatherHTML = `
+                <h3${response.name} ${currentDate}<img src="${currentIcon}"></h3>
+                <ul class="list-unstyled">
+                    <li> Temperature: ${response.main.temp}&#8457 </li>
+                    <li> Humidity: ${response.main.humidity}% </li>
+                    <li> Wind Speed: ${response.wind.speed} mph </li>
+                    <li id="uvIndex">UV Index:</li>
+                </ul> `;
 
-            //UV index
-            let lat = weatherResponse.coord.lat;
-            let lon = weatherResponse.coord.lon;
-            let uviURL = "https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}";
+            // Append the results to the DOM
+            $("#current-weather").html(currentWeatherHTML);
+                    
 
+            // Get UV index - longitude and latitude from Open Weather Maps API
+            let lat = response.coord.lat;
+            let lon = response.coord.lon;
+            let uviURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + ${lat} + "&lon=" + ${lon} + "&appid=" + ${apiKey};
 
+     
+    // Fetch the UV information and create color coding for the UV index
     fetch(uviUrl)
+        .then(formFetchHandler)
         .then(response => {
             if (response.ok) {
                 // Here we are getting the .then data and using it to display UVI Index
-                return response.json().then(function (data) {
-                });
-            }
+                return response.json();
+            });
+        }
         .then(function(uviResponse) {
             console.log(uviResponse.value);
 
             let uvIndex = uviResponse.value;
-            let uvIndexPara = $
-        }
-        )
+            $("#uvIndex").html("UV Index: <span id="uvData"> ${uvIndex}</span>);
+            if (uvIndex>=0 && uvIndex<3) {
+                $("#uvData").attr("class", "uv-favorable");
+
+            } else if (uvIndex>=3 && uvIndex<8) {
+                $("#uvData").attr("class", "uv-moderate");
+
+            } else if (uvIndex>=8) {
+                $("#uvData").attr("class", "uv-severe");
+            }
+            
         });
+        
+    })
 };
 
+/* Adding Event Listener to search button
+document.getElementById("#searchBtn").addEventListener("click", function);
+document.getElementById("#searchBtn").addEventListener("click", function); 
 
+$("#searchBtn").on("click", (event) => {
+event.preventDefault();
+currentCity = $
+getCurrentWeather(event);
+});
+*/
+
+listSearchedCities();
+
+getCurrentWeather();
 

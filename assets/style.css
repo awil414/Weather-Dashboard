@@ -65,6 +65,15 @@ button, input {
     line-height: 1.8;
 }
 
+.list-group {
+    margin-bottom: 10px;
+    padding: 1.5%;
+    border-radius: var(--border-radius);
+    background-color: var(--light-dark);
+    color: white;
+    text-decoration: none;
+}
+
 .five-day {
     display:flex;
 }
