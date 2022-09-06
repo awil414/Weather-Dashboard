@@ -1,113 +1,68 @@
-let currentDate = moment.unix(cityInfo.date).format("MM/DD/YY");
+let currentDate = moment().format("MM/DD/YY");
 let currentCity = "";
 let lastCity = "";
 
 // API Key
 let apiKey = "8cdec653bf4d6c9ed8b17db127872228";
 
+$("#searchBtn").on("click", (event) => {
+    event.preventDefault();
+    currentCity = $("#userInput").val();
+    getCurrentWeather(currentCity);
+    });
 
-// Handler for errors upon fetch
-var formFetchHandler = (response) => {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}
+var getCurrentWeather = (currentCity) => {
 
-// getCurrentWeather function to get and display the current weather
-var getCurrentWeather = (event) => {
-    // Get searched city name and trim out extra white space
-    var city = $("#user-input").value.trim();
-    currentCity = $("#user-input").value.trim();
+    let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial" + "&APPID=" + apiKey;
 
-    // Fetch from weather API
-    let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=" + "8cdec653bf4d6c9ed8b17db127872228";
-   
     fetch(apiUrl)
-        .then(formFetchHandler)
-        .then((response) => {
-            if (response.ok) {
-                // Here we are getting the .then data and using it to display weather
-                return response.json();
+    .then((response) => {
+        if (response.ok) {
+            // Here we are getting the .then data and using it to display weather
+            return response.json();
+        }
+    })
+    .then((data) => {
+        console.log(data)
+        let currentIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + ".png";
 
-            } else {
-                // If user has no input this is what they'll see
-                currentCity = " ",
-                    alert("Please enter a city");
-            };
-
-        .then((response) => {
-            // Save city to local storage
-            saveCity(city);
-
-            // Create icon for the current weather condition using Open Weather Maps
-            let currentIcon= "http://api.openweathermap.org/img/w/" + response.weather[0].icon + ".png";
-            })
-            // If catch error on server end response
-            .catch(function (error) {
-                alert("Unable to connect to Weather");
-            });
-        
-            let currentWeatherHTML = `
-                <h3${response.name} ${currentDate}<img src="${currentIcon}"></h3>
+        let currentWeatherHTML = `
+                <h3>${data.name} ${currentDate}<img src="${currentIcon}"></h3>
                 <ul class="list-unstyled">
-                    <li> Temperature: ${response.main.temp}&#8457 </li>
-                    <li> Humidity: ${response.main.humidity}% </li>
-                    <li> Wind Speed: ${response.wind.speed} mph </li>
+                    <li> Temperature: ${data.main.temp}&#8457 </li>
+                    <li> Humidity: ${data.main.humidity}% </li>
+                    <li> Wind Speed: ${data.wind.speed} mph </li>
                     <li id="uvIndex">UV Index:</li>
                 </ul> `;
+                $("#current-weather").html(currentWeatherHTML);
 
-            // Append the results to the DOM
-            $("#current-weather").html(currentWeatherHTML);
-                    
-
-            // Get UV index - longitude and latitude from Open Weather Maps API
-            let lat = response.coord.lat;
-            let lon = response.coord.lon;
-            let uviURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + ${lat} + "&lon=" + ${lon} + "&appid=" + ${apiKey};
-
-     
-    // Fetch the UV information and create color coding for the UV index
-    fetch(uviUrl)
-        .then(formFetchHandler)
-        .then(response => {
-            if (response.ok) {
-                // Here we are getting the .then data and using it to display UVI Index
-                return response.json();
-            });
-        }
-        .then(function(uviResponse) {
-            console.log(uviResponse.value);
-
-            let uvIndex = uviResponse.value;
-            $("#uvIndex").html("UV Index: <span id="uvData"> ${uvIndex}</span>);
-            if (uvIndex>=0 && uvIndex<3) {
-                $("#uvData").attr("class", "uv-favorable");
-
-            } else if (uvIndex>=3 && uvIndex<8) {
-                $("#uvData").attr("class", "uv-moderate");
-
-            } else if (uvIndex>=8) {
-                $("#uvData").attr("class", "uv-severe");
-            }
-            
-        });
-        
+                getUvi(data.coord.lat, data.coord.lon)
     })
-};
 
-/* Adding Event Listener to search button
-document.getElementById("#searchBtn").addEventListener("click", function);
-document.getElementById("#searchBtn").addEventListener("click", function); 
+}
 
-$("#searchBtn").on("click", (event) => {
-event.preventDefault();
-currentCity = $
-getCurrentWeather(event);
-});
-*/
+var getUvi = (lat, lon) => {
+    let uviUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
 
-listSearchedCities();
+    fetch(uviUrl)
+    .then((response) => {
+        if (response.ok) {
+            // Here we are getting the .then data and using it to display weather
+            return response.json();
+        }
+    })
+    .then((data) => {
+        console.log(data)
+        let uvIndex = data.value;
+        $("#uvIndex").html(`UV Index: <span id="uvData"> ${uvIndex}</span>`);
+        if (uvIndex>=0 && uvIndex<3) {
+            $("#uvData").attr("class", "uv-favorable");
 
-getCurrentWeather();
+        } else if (uvIndex>=3 && uvIndex<8) {
+            $("#uvData").attr("class", "uv-moderate");
 
+        } else if (uvIndex>=8) {
+            $("#uvData").attr("class", "uv-severe");
+        }
+    })
+}
