@@ -1,37 +1,47 @@
-body {
-    background-color: rgb(255, 252, 234);
-    font-family: "poppins";
+:root {
+    --primary: #b5ccdf;
+    --secondary: #509ad7;
+    --tertiary: #79a3c8;
+    --light-dark: #4b74a5;
+    --dark: #425364;
+    --border-radius: 0.3rem;
 }
 
-h2 {
-    color: rgb(11, 11, 180);
-}
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
-*, ::after, ::before {
+* {
     box-sizing: border-box;
 }
 
-#search-results {
+body {
+    background-color: rgb(255, 252, 234);
     height: 100vh;
+    color: var(--dark);
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: "poppins";
 }
 
-.col-3 {
-    flex: 0 0 25%;
-        flex-grow: 0;
-        flex-shrink: 0;
-        flex-basis: 25%;
-    max-width: 25%;
+/*h2 {
+    color: rgb(11, 11, 180);
+} */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    margin: 0;
+    color: var(--dark);
+    line-height: 1.25;
 }
 
-.col-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
+.card {
+    margin: 0 0 20px 0;
+    border: 3px solid var(--dark);
+    border-radius: var(--border-radius);
+}
+  
+.card-header {
+    color: var(--primary);
+    background-color: var(--dark);
+    padding: 2.5%;
+    border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
 
 .btn {
@@ -43,6 +53,23 @@ button, input {
     overflow: visible;
 }
 
-.list-item-current {
-    list-style-type: none;
+.weather-card {
+    margin-bottom: 10px;
+    padding: 1.5%;
+    border-radius: var(--border-radius);
+    background-color: var(--light-dark);
+    color: var(--primary);
+    text-decoration: none;
+    margin-right: 10px;
+    height: 250px;
+    line-height: 1.8;
 }
+
+.five-day {
+    display:flex;
+}
+
+.subtitle {
+    display:none;
+}
+

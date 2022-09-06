@@ -35,9 +35,41 @@
                 <h2>Weather Dashboard</h2>
             </div>
     </div>
-    <div class="row">
-        <div class="col-4 pb-2 pt-3" id="search-area">
-            <div class="row">
+
+<!-- Left-side card for search box, user input and searach history --> 
+<main class="flex-row justify-space-between">
+    <div class= "col-12 col-sm-12 col-md-4 float-left"></div>
+
+        <!-- Search imput area and search button-->
+        <div class="card">
+            <h4 class="card-header text-uppercase">Search for a City:</h4> 
+            <div class= card-body id="user-form">
+                <input type="text" id="userInput" placeholder="Enter City">
+                <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
+            </div>
+        </div>
+
+        <!-- -->
+        <div class="card-history">
+            <h5 class="card-header text-uppercase">Search History</h5> 
+        </div>
+
+    <div class= "col-12 col-sm-12 col-md-8 float-right">
+        <div>
+            <h3 class="subtitle text-uppercase bg-light">Current Weather</h3>
+            <div class="city">
+        </div>
+
+        </div>
+            <h3 class="subtitle text-uppercase bg-light">5 Day forecast</h3>
+            <div class="forecast"><div>
+        </div>
+    </div>
+</main>
+
+
+
+        <!--   <div class="row">
                 <div class="col-12">
                     <h5> Search for a City: </h5>
                 </div>
@@ -49,8 +81,8 @@
                         <div class="d-grid col-12 mx-auto">
                             <button class="btn btn-primary" id="searchBtn" type="button">Search</button>
                         </div>
-                        <!--<button class="btn btn-primary" id="searchBtn">
-                            <i class="fas fa-search"></i></button> -->
+                        <button class="btn btn-primary" id="searchBtn">
+                            <i class="fas fa-search"></i></button> 
                     </div>
                 </div>
             </div>
@@ -65,8 +97,8 @@
                                 <p class="history-city3">A third item</p>
                             </div>
                     </div>
-                    <!--<ul class="search-list" id="search-history"> -->
-                        <!-- append li here -->
+                    <ul class="search-list" id="search-history"> 
+                        append li here
                 </div>
             </div>
         </div>
@@ -75,8 +107,8 @@
     <div class="col-8 pb-5 pt-8" id="weather-display">
         <div class="row">
             <div class="col-12">
-                <!--<div style="height: 100px; background-color: rgba(255,0,0,0.1);"> 
-                    <div class="h-75 d-inline-block">Height 50%</div> -->
+                <div style="height: 100px; background-color: rgba(255,0,0,0.1);"> 
+                    <div class="h-75 d-inline-block">Height 50%</div> 
                         <div class="card" style="width: 100%">
                             <div class="card-body">
                                 <h5 class="current-weather" id="currentWeather">Date</h5>
@@ -168,7 +200,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Links to jQuery, moment.js, and JavaScript-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

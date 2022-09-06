@@ -35,7 +35,7 @@ var formSubmitHandler = function (event) {
 // var getCityWeather = function (cityName) 
 
 
-let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}";
+let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + ${city}&units=imperial&appid=${apiKey}";
 //let iconUrl = `<img src="http://api.openweathermap.org/img/w/${iconCode}.png" alt="${futureResponse.daily[i].weather[0].main}" />`;
 
 // Function to call current weather
