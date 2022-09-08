@@ -64,5 +64,26 @@ var getUvi = (lat, lon) => {
         } else if (uvIndex>=8) {
             $("#uvData").attr("class", "uv-severe");
         }
+       
+    })
+        
+}
+
+var getForecast = (currentCity) => {
+    
+    // Create URL for forecast search
+    let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&units=imperial" + "&appid=" + apiKey + "&cnt=5";
+
+    // Fetch forecast API
+    fetch(forecastUrl)
+    .then((response) => {
+        if (response.ok) {
+            // Here we GET the data
+            return response.json();
+        }  
+    })
+    .then((data) => {
+        console.log(data)
+        // Here we DISPLAY the data
     })
 }
