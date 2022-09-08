@@ -10,6 +10,7 @@ $("#searchBtn").on("click", (event) => {
     currentCity = $("#userInput").val();
     getCurrentWeather(currentCity);
     getForecast(currentCity);
+   // saveCity(currentCity);
     });
 
 var getCurrentWeather = (currentCity) => {
@@ -26,7 +27,7 @@ var getCurrentWeather = (currentCity) => {
     .then((data) => {
         console.log(data)
         let currentIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-
+        //Display to DOM
         let currentWeatherHTML = `
                 <h3>${data.name} ${currentDate}<img src="${currentIcon}"></h3>
                 <ul class="list-unstyled">
@@ -85,6 +86,24 @@ var getForecast = (currentCity) => {
     })
     .then((data) => {
         console.log(data)
+       // let forecastIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + i + ".png";
         // Here we DISPLAY the data
+
+        for (var i=1; i<6; i++) {
+            let forecastDate = (currentDate + i)
+        let forecastHTML = `
+        
+            <h5>${forecastDate}</h5> 
+                <ul class="list-unstyled">
+                    <li> Temperature: ${data.main.temp}&#8457 </li>
+                    <li> Humidity: ${data.main.humidity}% </li>
+                    <li> Wind Speed: ${data.wind.speed} mph </li>
+                    <li id="uvIndex">UV Index:</li>
+                </ul> `;
+                $("#future-weather").html(forecastHTML);
+        
+        
+        }
     })
-}
+    
+}// <img src="${forecastIcon}">

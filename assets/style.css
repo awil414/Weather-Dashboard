@@ -82,3 +82,14 @@ button, input {
     display:none;
 }
 
+.uv-favorable {
+    background-color: lightgreen;
+}
+
+.uv-moderate {
+    background-color: gold;
+}
+
+.uv-severe {
+    background-color: red;
+}
