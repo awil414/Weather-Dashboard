@@ -9,6 +9,7 @@ $("#searchBtn").on("click", (event) => {
     event.preventDefault();
     currentCity = $("#userInput").val();
     getCurrentWeather(currentCity);
+    getForecast(currentCity);
     });
 
 var getCurrentWeather = (currentCity) => {
