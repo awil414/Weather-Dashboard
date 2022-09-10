@@ -89,11 +89,11 @@ var getForecastWeather = (currentCity) => {
 
           // Here we DISPLAY the data
    
-        for ( var i = 0; i < data.list.length; i ++ ) {
+        for ( var i = 0; i < data.list.length; i += 4 ) {
             let forecastDate = (new Date(data.list[i].dt * 1000));
-            let forecastIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + i + ".png";
+        //    let forecastIcon= "http://api.openweathermap.org/img/w/" + data.list[0].icon + i + ".png";
             let forecastWeatherHTML = `
-            <h5>${data.name} ${forecastDate}<img src="${forecastIcon}"></h5>
+            <h5> ${data.name} ${forecastDate} </h5>
                 <ul class="list-unstyled">
                     <li> Temperature: ${data.list[i].main.temp}&#8457 </li>
                     <li> Humidity: ${data.list[i].main.humidity}% </li>
