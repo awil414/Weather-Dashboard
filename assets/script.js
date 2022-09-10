@@ -9,7 +9,7 @@ $("#searchBtn").on("click", (event) => {
     event.preventDefault();
     currentCity = $("#userInput").val();
     getCurrentWeather(currentCity);
-    getForecast(currentCity);
+    getForecastWeather(currentCity);
    // saveCity(currentCity);
     });
 
@@ -71,7 +71,7 @@ var getUvi = (lat, lon) => {
         
 }
 
-var getForecast = (currentCity) => {
+var getForecastWeather = (currentCity) => {
     
     // Create URL for forecast search
     let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&units=imperial" + "&appid=" + apiKey + "&cnt=5";
@@ -86,24 +86,25 @@ var getForecast = (currentCity) => {
     })
     .then((data) => {
         console.log(data)
-       // let forecastIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + i + ".png";
-        // Here we DISPLAY the data
 
-        for (var i=1; i<6; i++) {
-            let forecastDate = (currentDate + i)
-        let forecastHTML = `
-        
-            <h5>${forecastDate}</h5> 
+          // Here we DISPLAY the data
+   
+        for ( var i = 0; i < data.list.length; i ++ ) {
+            let forecastDate = (new Date(data.list[i].dt * 1000));
+            let forecastIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + i + ".png";
+            let forecastWeatherHTML = `
+            <h5>${data.name} ${forecastDate}<img src="${forecastIcon}"></h5>
                 <ul class="list-unstyled">
-                    <li> Temperature: ${data.main.temp}&#8457 </li>
-                    <li> Humidity: ${data.main.humidity}% </li>
-                    <li> Wind Speed: ${data.wind.speed} mph </li>
+                    <li> Temperature: ${data.list[i].main.temp}&#8457 </li>
+                    <li> Humidity: ${data.list[i].main.humidity}% </li>
+                    <li> Wind Speed: ${data.list[i].wind.speed} mph </li>
                     <li id="uvIndex">UV Index:</li>
                 </ul> `;
-                $("#future-weather").html(forecastHTML);
+                $("#forecast").html(forecastWeatherHTML);
         
         
         }
     })
+}
     
-}// <img src="${forecastIcon}">
+ // <img src="${forecastIcon}">
