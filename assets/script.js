@@ -74,7 +74,7 @@ var getUvi = (lat, lon) => {
 var getForecastWeather = (currentCity) => {
     
     // Create URL for forecast search
-    let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&units=imperial" + "&appid=" + apiKey + "&cnt=5";
+    let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&units=imperial" + "&appid=" + apiKey + "&cnt=40";
 
     // Fetch forecast API
     fetch(forecastUrl)
@@ -88,23 +88,45 @@ var getForecastWeather = (currentCity) => {
         console.log(data)
 
           // Here we DISPLAY the data
-   
-        for ( var i = 0; i < data.list.length; i += 4 ) {
-            let forecastDate = (new Date(data.list[i].dt * 1000));
-        //    let forecastIcon= "http://api.openweathermap.org/img/w/" + data.list[0].icon + i + ".png";
-            let forecastWeatherHTML = `
-            <h5> ${data.name} ${forecastDate} </h5>
-                <ul class="list-unstyled">
-                    <li> Temperature: ${data.list[i].main.temp}&#8457 </li>
-                    <li> Humidity: ${data.list[i].main.humidity}% </li>
-                    <li> Wind Speed: ${data.list[i].wind.speed} mph </li>
-                    <li id="uvIndex">UV Index:</li>
-                </ul> `;
-                $("#forecast").html(forecastWeatherHTML);
-        
-        
-        }
-    })
-}
+        let fiveDayForecastHeaderEl = $("<h2>");
+        var fiveDayForecastEl = $("#forecast");
+     //   fiveDayForecastHeaderEl.text.append(fiveDayForecastEl);
+        for ( var i = 1; i < data.list.length; i +=8 ) {
+
+                let date;
+                let temp;
+                let icon;
+                let wind;
+                let humidity;
+
+              
+                date = moment(data.list[i].dt * 1000).add(1, "days").format("MM/DD/YY");
+
+                temp = data.list[i].main.temp;
+         //       icon = data.list[i].main.weather[0].icon;
+                var newIcon = data.list[i].weather[0].icon.replace("n", "d")
+                icon= "http://openweathermap.org/img/wn/" + newIcon + ".png";
+                humidity = data.list[i].main.humidity;
+                wind = data.list[i].wind.speed;
+                
+                //create a card
+                let card = document.createElement("div");
+                card.classList.add("card", "m-1", "bg-primary", "text-white");
+                
+                // create card body and append
+                let cardBody = document.createElement("div");
+                cardBody.classList.add("card-body");
+                cardBody.innerHTML = 
+                    `<h5>${date}</h5>
+                        <img src= "${icon}"/>
+                       <p> T: ${temp}°F </p> 
+                     <p> W:  ${wind} KPH </p> 
+                     <p> H:  ${humidity}% </p>`
+                card.appendChild(cardBody);
+                fiveDayForecastEl.append(card);
+            }
+        })
     
- // <img src="${forecastIcon}">
+};
+    
+ 
