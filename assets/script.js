@@ -1,6 +1,7 @@
 let currentDate = moment().format("MM/DD/YY");
 let currentCity = "";
-let lastCity = "";
+var pastSearchedCitiesEl = $("#past-searches");
+let pastCity = "";
 
 // API Key
 let apiKey = "8cdec653bf4d6c9ed8b17db127872228";
@@ -10,6 +11,8 @@ $("#searchBtn").on("click", (event) => {
     currentCity = $("#userInput").val();
     getCurrentWeather(currentCity);
     getForecastWeather(currentCity);
+  //  clearCurrentWeather();
+ //   getCoordinates();
    // saveCity(currentCity);
     });
 
@@ -37,8 +40,18 @@ var getCurrentWeather = (currentCity) => {
                     <li id="uvIndex">UV Index:</li>
                 </ul> `;
                 $("#current-weather").html(currentWeatherHTML);
-
+                let cityInfo = {
+                    city: currentCity,
+                    lon: data.coord.lon,
+                    lat: data.coord.lat,
+                }
+            //    let storedCities = JSON.parse(localStorarge.getitem(pastSearchedCitiesEl));
+             //   storedCities.push(cityInfo);
+                localStorage.setItem(pastSearchedCitiesEl, JSON.stringify(cityInfo));
+                
+                displaySearchHistory();
                 getUvi(data.coord.lat, data.coord.lon)
+
     })
 
 }
@@ -88,9 +101,10 @@ var getForecastWeather = (currentCity) => {
         console.log(data)
 
           // Here we DISPLAY the data
+        //Create forecast header
         let fiveDayForecastHeaderEl = $("<h2>");
         var fiveDayForecastEl = $("#forecast");
-     //   fiveDayForecastHeaderEl.text.append(fiveDayForecastEl);
+       
         for ( var i = 1; i < data.list.length; i +=8 ) {
 
                 let date;
@@ -126,7 +140,63 @@ var getForecastWeather = (currentCity) => {
                 fiveDayForecastEl.append(card);
             }
         })
-    
 };
+
+/* 
+When user clicks o previously searched city
+function getPastCity (event) {
+    var element = event.target;
+
+
+} */
+
+function displaySearchHistory() {
+    let storedCities = JSON.parse(localStorage.getitem(pastSearchedCitiesEl));
+    let pastSearchesEl = document.getElementById("past-searches");
+
+     pastSearchesEl.HTML ="";
+
+    for (i = 0; i < storedCities.length; i++) {
+        var pastCityBtn = document.createElement("button");
+        pastCityBtn.classList.add("btn", "btn-primary", "my-2", "past-city");
+        pastCityBtn.setAttibute("style", "width:100%");
+        pastCityBtn.textContent = `${storedCities[i].city}`;
+        pastSearchesEl.appendChild(pastCityBtn);
+    }
+    return;
+};
+
+/*function getCoordinates() {
+    let requestUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial" + "&APPID=" + apiKey;
+    let storedCities = JSON.parse(localStorarge.getitem("cities")) || [];
+        fetch(requestUrl)
+        .then((response) => {
+            if (response.ok) {
+                // Here we are getting the .then data and using it to display weather
+                return response.json();
+            }
+        })
+        .then((data) => {
+            console.log(data)
+            let cityInfo = {
+                city: currentCity,
+                lon: data.coord.lon,
+                lat: data.coord.lat,
+            }
+
+            storedCities.push(cityInfo);
+            localStorage.setItem("cities", JSON.stringify(storedCities));
+
+            displaySearchHistory();
+
+            return cityInfo;
+        })
+    }
+
+/*
+function getSavedCity
     
- 
+
+    displaySearchHistory();
+    pastSearchedCitiesEl.on("click", getPastCity) 
+    */
