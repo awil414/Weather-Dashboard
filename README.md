@@ -8,7 +8,7 @@ Weather Now is an application to find the current and 5-Days forecast of a given
 ## Github URL link
  https://awil414.github.io/Weather-Now/
  
- ## Github Reposisitory link
+ ## Github Repository link
 
  ## Visuals
 
