@@ -18,7 +18,7 @@ $("#searchBtn").on("click", (event) => {
 
 var getCurrentWeather = (currentCity) => {
 
-    let apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial" + "&APPID=" + apiKey;
+    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&units=imperial" + "&APPID=" + apiKey;
 
     fetch(apiUrl)
     .then((response) => {
@@ -31,7 +31,7 @@ var getCurrentWeather = (currentCity) => {
         console.log(data)
     //    saveCity = JSON.parse(localStorage.getItem("currentCity"));
     //    console.log(saveCity);
-        let currentIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+        let currentIcon= "https://api.openweathermap.org/img/w/" + data.weather[0].icon + ".png";
         //Display to DOM
         let currentWeatherHTML = `
                 <h3>${data.name} ${currentDate}<img src="${currentIcon}"></h3>
@@ -120,7 +120,7 @@ var getForecastWeather = (currentCity) => {
                 temp = data.list[i].main.temp;
          //       icon = data.list[i].main.weather[0].icon;
                 var newIcon = data.list[i].weather[0].icon.replace("n", "d")
-                icon= "http://openweathermap.org/img/wn/" + newIcon + ".png";
+                icon= "https://openweathermap.org/img/wn/" + newIcon + ".png";
                 humidity = data.list[i].main.humidity;
                 wind = data.list[i].wind.speed;
                 
