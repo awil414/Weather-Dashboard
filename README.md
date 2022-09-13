@@ -16,11 +16,7 @@ Weather Now is an application to find the current and 5-Days forecast of a given
  ## Usage
 Find current and 5-day forecast for any given city. The current and forecast weather section include the following weather characters and date:
 
-City, Date, Icon-image 
-Temperature 
-Humidity 
-Wind Speed 
-UV index 
+City, Date, Icon-image, Temperature, Humidity Wind Speed, UV index 
 
 ## Authors and acknowledgement
 Built by Amber Wilson
