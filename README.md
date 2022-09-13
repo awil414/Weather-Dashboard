@@ -1,5 +1,4 @@
 # Weather Now
-# Sing-A-Like
 
 ## Get up-to-date and future weather information for any given city
 
