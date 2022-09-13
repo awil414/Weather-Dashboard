@@ -1,8 +1,8 @@
 # Weather Now
 
-Description 
+##Description:
 
-### Weather Now is an application to find the current and 5-Days forecast of a given city. Yhe server-side API used to get response data object is retrtieved from the Open Weather API. The vurrent weather section is including the following weather characters and date:
+### Weather Now is an application to find the current and 5-Days forecast of a given city. The server-side API used to get response data object is retrtieved from the Open Weather API. The vurrent weather section is including the following weather characters and date:
 
 <ul>
     <li> City, Date, Icon-image </li>
