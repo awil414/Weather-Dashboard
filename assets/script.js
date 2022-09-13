@@ -1,7 +1,7 @@
 let currentDate = moment().format("MM/DD/YY");
 let currentCity = "";
 var pastSearchedCitiesEl = $("#past-searches");
-let pastCity = "";
+let saveCity = [];
 
 // API Key
 let apiKey = "8cdec653bf4d6c9ed8b17db127872228";
@@ -29,6 +29,8 @@ var getCurrentWeather = (currentCity) => {
     })
     .then((data) => {
         console.log(data)
+    //    saveCity = JSON.parse(localStorage.getItem("currentCity"));
+    //    console.log(saveCity);
         let currentIcon= "http://api.openweathermap.org/img/w/" + data.weather[0].icon + ".png";
         //Display to DOM
         let currentWeatherHTML = `
@@ -48,8 +50,7 @@ var getCurrentWeather = (currentCity) => {
             //    let storedCities = JSON.parse(localStorarge.getitem(pastSearchedCitiesEl));
              //   storedCities.push(cityInfo);
                 localStorage.setItem(pastSearchedCitiesEl, JSON.stringify(cityInfo));
-                
-                displaySearchHistory();
+             
                 getUvi(data.coord.lat, data.coord.lon)
 
     })
@@ -134,7 +135,7 @@ var getForecastWeather = (currentCity) => {
                     `<h5>${date}</h5>
                         <img src= "${icon}"/>
                        <p> T: ${temp}°F </p> 
-                     <p> W:  ${wind} KPH </p> 
+                     <p> W:  ${wind} mph </p> 
                      <p> H:  ${humidity}% </p>`
                 card.appendChild(cardBody);
                 fiveDayForecastEl.append(card);
