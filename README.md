@@ -12,7 +12,7 @@
     <li> UV index </li>
 <ul/>
 
-The 5-days weather forecast also displays below the current weather conditions section and it includes the following information for each day:
+### The 5-days weather forecast also displays below the current weather conditions section and it includes the following information for each day:
 
 <ul>
     <li> Date </li>
