@@ -14,6 +14,10 @@ Weather Now is an application to find the current and 5-Day forecast of a given 
  ## Visuals
 <img width="1280" alt="Screen Shot 2022-09-12 at 9 46 20 PM-1" src="https://user-images.githubusercontent.com/109228469/189797509-6338154f-c8fa-4e00-b628-e753fe28d34e.png">
  
+ ## To-dos:
+Save city to local storage.
+Display city in search history.
+
 Built by Amber Wilson
 
 ## License
