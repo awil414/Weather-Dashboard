@@ -3,7 +3,7 @@
 ## Get up-to-date and future weather information for any given city.
 
 ## Description
-Weather Now is an application to find the current and 5-Days forecast of a given city. The server-side API used to get response data object is retrieved from the Open Weather API. The current and forecast weather section include the following weather characters and date.
+Weather Now is an application to find the current and 5-Days forecast of a given city. The server-side API used to get response data object is retrieved from the Open Weather API. The current and forecast weather section include city, date, icon-image, temperature, humidity, wind speed, UV and index.
 
 ## Github URL link
  https://awil414.github.io/Weather-Now/
@@ -12,14 +12,9 @@ Weather Now is an application to find the current and 5-Days forecast of a given
  https://github.com/awil414/Weather-Now.git
 
  ## Visuals
-
- ## Usage
-Find current and 5-day forecast for any given city. The current and forecast weather section include the following weather characters and date:
-
-City, Date, Icon-image, Temperature, Humidity Wind Speed, UV index 
-
-## Authors and acknowledgement
+<img width="1280" alt="Screen Shot 2022-09-12 at 9 46 20 PM-1" src="https://user-images.githubusercontent.com/109228469/189797509-6338154f-c8fa-4e00-b628-e753fe28d34e.png">
+ 
 Built by Amber Wilson
 
 ## License
-Licensed through Trilogy Eductaion and Vanderbilt Univeristy 
+Licensed through Trilogy Education and Vanderbilt University 
