@@ -2,7 +2,7 @@
 
 <h3> Description: <h3>
 
-### Weather Now is an application to find the current and 5-Days forecast of a given city. The server-side API used to get response data object is retrieved from the Open Weather API. The current and forecast weather section include the following weather characters and date:
+### Weather Now is an application to find the current and 5-Days forecast of a given city. The server-side API used to get response data object is retrieved from the Open Weather API. The current and forecast weather section include the following weather characters and date. Check out the live link here: https://awil414.github.io/Weather-Now/
 
 <ul>
     <li> City, Date, Icon-image </li>
@@ -11,5 +11,3 @@
     <li> Wind Speed </li>
     <li> UV index </li>
 <ul/>
-
-### https://awil414.github.io/Weather-Now/
