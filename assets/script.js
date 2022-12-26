@@ -9,12 +9,23 @@ let apiKey = "8cdec653bf4d6c9ed8b17db127872228";
 $("#searchBtn").on("click", (event) => {
     event.preventDefault();
     currentCity = $("#userInput").val();
+    if(currentCity) {
     getCurrentWeather(currentCity);
     getForecastWeather(currentCity);
+    currentCities.unshift({currentCity});
+    } else {
+        alert("Please enter a city");
+    }
+    saveSearch();
+    displaySearchHistory(currentCity);
   //  clearCurrentWeather();
  //   getCoordinates();
    // saveCity(currentCity);
     });
+
+var saveSearch = () => {
+    localStorage.setitem("currentCities", JSON.stringify(currentCity));
+}
 
 var getCurrentWeather = (currentCity) => {
 
@@ -155,12 +166,13 @@ function displaySearchHistory() {
     let storedCities = JSON.parse(localStorage.getitem(pastSearchedCitiesEl));
     let pastSearchesEl = document.getElementById("past-searches");
 
+    pastSearchesEl = $(".list-group");
      pastSearchesEl.HTML ="";
 
     for (i = 0; i < storedCities.length; i++) {
         var pastCityBtn = document.createElement("button");
         pastCityBtn.classList.add("btn", "btn-primary", "my-2", "past-city");
-        pastCityBtn.setAttibute("style", "width:100%");
+        pastCityBtn.setAttribute("style", "width:100%");
         pastCityBtn.textContent = `${storedCities[i].city}`;
         pastSearchesEl.appendChild(pastCityBtn);
     }
